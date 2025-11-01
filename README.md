@@ -4,8 +4,14 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
 
 ## Menu
 - [Cours pour les webdev 2025](#cours-pour-les-webdev-2025)
+- [Supports de cours précédents (versions 6.4 LTS)](#supports-de-cours-précédents-versions-64-lts)
 - [Installation de Symfony en local](#installation-de-symfony-en-local)
 - [Installation de la version démo de Symfony 7.3.*](#installation-de-la-version-démo-de-symfony-733)
+- [Création d'un nouveau projet Symfony 7.3 vide](#création-dun-nouveau-projet-symfony-73-vide)
+- [Installons la version --webapp avec composer](#installons-la-version--webapp-avec-composer)
+- [Création d'un nouveau projet Symfony 7.3 webapp](#création-dun-nouveau-projet-symfony-73-webapp)
+  - Exercice 1
+
 
 ## Cours pour les webdev 2025
 
@@ -14,6 +20,8 @@ Vu le temps de formation restant relativement court, nous irons à l'essentiel.
 Cette version sera mise à jour régulièrement, car nous partirons de la **dernière version de Symfony pour être au plus proche des nouveautés**.
 
 La version **7.4 LTS** (Long Term Support) est prévue pour novembre 2025. Cette version sera supportée jusqu'en novembre 2029 (4 ans de support standard + 4 ans de support étendu).
+
+[Retour au menu](#menu)
 
 ### Pour les anciennes versions, nous avons :
 
@@ -27,6 +35,21 @@ La force d'un système comme Symfony est de pouvoir évoluer facilement, et de b
 
 
 Celà nous laisse le temps de nous familiariser avec Symfony 7.3.4 (lors de la création de ce support de cours), et de migrer vers Symfony 7.4 lorsque celle-ci sera disponible.
+
+[Retour au menu](#menu)
+
+## Supports de cours précédents (versions 6.4 LTS)
+
+#### Vous aurez ainsi les sources pour continuer votre apprentissage après la formation. Nous pourrons aussi nous en servir pour comparer les versions et faire surtout des exercices dans cette version 7.x.
+
+Voici 2 de mes anciens cours sur Symfony 6.4 LTS :
+- [Symfony de 6.2 à 6.4 LTS - Cours complet pour les WebDev 2023](https://github.com/mikhawa/symfony-2023-05-10)
+- [Symfony 6.4 LTS - Cours complet pour les WebDev 2024](https://github.com/mikhawa/Symfony-6.4-LTS)
+
+Voici le documentation officielle de Symfony 6.4 LTS (toujours valable pour Symfony 7.x) :
+- [Symfony 6.4 LTS Documentation Officielle](https://symfony.com/doc/6.4)
+
+[Retour au menu](#menu)
 
 ## Installation de Symfony en local
 
@@ -75,10 +98,12 @@ Voici comment installer Symfony CLI selon votre système d'exploitation :
    symfony server:ca:install
    ```
 
-## Installation de la version démo de Symfony 7.3.*
-Pour créer un nouveau projet Symfony, vous pouvez utiliser la commande suivante dans votre terminal :
+[Retour au menu](#menu)
 
-**faites le en dehors de sym2025, qui est déjà un projet .git !**
+## Installation de la version démo de Symfony 7.3.*
+
+Pour créer un nouveau projet Symfony, vous pouvez utiliser la commande suivante dans votre terminal depuis le dossier dans lequel vous souhaitez créer le projet (attention à ne pas être dans un dossier `.git` déjà existant) :
+
 
 ```bash
 symfony new symfony_demo --demo
@@ -87,21 +112,24 @@ symfony new symfony_demo --demo
 
 Cette commande créera un nouveau répertoire avec le nom de votre projet et installera la version démo de Symfony, qui inclut plusieurs fonctionnalités prêtes à l'emploi pour vous aider à démarrer rapidement.
 
-6. **Accéder au projet** : Une fois l'installation terminée, accédez au répertoire de votre projet avec la commande suivante :
+**Accéder au projet** : Une fois l'installation terminée, accédez au répertoire de votre projet avec la commande suivante :
+
    ```bash
    cd symfony_demo
    ```
-7. **Lancer le serveur de développement** : Vous pouvez lancer le serveur de développement intégré de Symfony avec la commande suivante :
+**Lancer le serveur de développement** : Vous pouvez lancer le serveur de développement intégré de Symfony avec la commande suivante :
+
    ```bash
     symfony server:start
    # ou pour le lancer en arrière plan
     symfony server:start -d
    # ou simplement
     symfony serve
-    ```
+  ```
+
 L'option `-d` permet de lancer le serveur en arrière-plan (détaché). S'il ne fonctionne pas, vous devrez garder la console ouverte et voir les logs.
 
-8. **Accéder à votre application** : Ouvrez votre navigateur web et accédez à l'adresse suivante :
+**Accéder à votre application** : Ouvrez votre navigateur web et accédez à l'adresse suivante :
    ```
    https://127.0.0.1:8000
    ```
@@ -111,4 +139,62 @@ Pour arrêter le serveur, vous pouvez utiliser la commande suivante dans le term
 ```bash
 symfony server:stop
 ```
+[Retour au menu](#menu)
+
+## Création d'un nouveau projet Symfony 7.3 vide
+
+Si vous souhaitez créer un nouveau projet Symfony vide (sans les fonctionnalités de la version démo), vous pouvez utiliser la commande suivante :
+
+```bash
+symfony new v1
+```
+`v1` est le nom que vous souhaitez donner à votre projet vide.
+Cette commande créera un nouveau répertoire avec le nom de votre projet et installera une version minimale de Symfony.
+
+Elle vous permettra de commencer à construire votre application Symfony à partir de zéro, en ajoutant uniquement les composants dont vous avez besoin.
+
+Nous verrons cette fonctionnalité plus en détail lors de la création d'une `API` REST avec Symfony.
+
+[Retour au menu](#menu)
+
+## Installons la version --webapp avec composer
+
+Pour avoir les fonctionnalités de base pour une application web,
+nous pouvons rajouter à notre `v1` les fonctionnalités webapp en utilisant la commande composer suivante :
+
+```bash
+composer require webapp
+```
+
+[Retour au menu](#menu)
+
+## Création d'un nouveau projet Symfony 7.3 webapp
+
+Si vous souhaitez créer un nouveau projet Symfony avec les fonctionnalités de base pour une application web, vous pouvez utiliser la commande suivante :
+
+```bash
+symfony new v2 --webapp
+```
+`v2` est le nom que vous souhaitez donner à votre projet webapp.
+Cette commande créera un nouveau répertoire avec le nom de votre projet et installera une version de Symfony avec les fonctionnalités de base pour une application web.
+
+Une fois l'installation terminée, accédez au répertoire de votre projet avec la commande suivante :
+   ```bash
+   cd v2
+   ```
+Vous pouvez ensuite lancer le serveur de développement intégré de Symfony avec la commande suivante :
+   ```bash
+    symfony serve
+   ```
+Vous pouvez accéder à votre application en ouvrant votre navigateur web et en accédant à l'adresse suivante :
+   ```
+   https://127.0.0.1:8000
+   ```
+
+[Retour au menu](#menu)
+
+### Création d'un controleur de base
+
+
+
 
