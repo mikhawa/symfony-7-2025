@@ -11,9 +11,10 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
 - [Installons la version --webapp avec composer](#installons-la-version---webapp-avec-composer)
 - [Création d'un nouveau projet Symfony 7.3 webapp](#création-dun-nouveau-projet-symfony-73-webapp)
 - [Création d'un controleur de base](#création-dun-controleur-de-base)
-    - [Exercice 1](#exercice-1)
+        - [Exercice 1](#exercice-1)
 - [Les routes](#les-routes)
   - [Les routes en YAML](#les-routes-en-yaml)
+        - [Exercice 2](#exercice-2)
   - [Les annotations de route](#les-annotations-de-route)
   
 
@@ -267,7 +268,7 @@ Vous devriez pouvoir le tester en ajoutant la méthode `page2` dans le contrôle
 ```php
 // src/Controller/HomeController.php
 # ...
-    #[Route('/page2', name: 'page2')]
+
     public function page2(): Response
     {
         return new Response('Bienvenue sur la page 2 !');
@@ -285,6 +286,26 @@ php bin/console cache:clear
 
 Vous devriez pouvoir accéder à la page 2 via l'URL https://127.0.0.1:8000/page2
 
+Vous pouvez vérifier les routes définies avec la commande :
+
+```bash
+php bin/console debug:router
+```
+
+[Retour au menu](#menu)
+
+#### Exercice 2
+
+1. Créez un nouveau projet Symfony webapp nommé `SymfonyExercice2`.
+2. Créez un contrôleur nommé `YamlController` en utilisant la commande `make:controller`.
+3. 
+3. Vous devez définir une route dans le fichier `config/routes.yaml` pour la méthode `index` de ce contrôleur, afin qu'elle soit accessible via l'URL racine `/`.
+3. Dans ce contrôleur, modifiez la méthode `index` pour qu'elle renvoie une réponse dans une variable `title` contenant le texte "Bienvenue sur la page d'accueil !", en plus du code de la vue par défaut.
+4. Dans le fichier de vue `templates/home/index.html.twig`, affichez la variable `title` dans la balise `<h1>` à la place du texte par défaut.
+5. Configurez une route pour cette méthode afin qu'elle soit accessible via l'URL racine `/`.
+6. Testez votre application en accédant à l'URL `https://127.0.0.1:8000/` dans votre navigateur.
+
+Envoyez-moi le code à `gitweb@cf2m.be` de votre contrôleur `src\Controller\HomeController.php` et `templates\home\index.html.twig` une fois que vous avez terminé l'exercice.
 
 [Retour au menu](#menu)
 
