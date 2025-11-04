@@ -16,8 +16,8 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
   - [Les routes en YAML](#les-routes-en-yaml)
         - [Exercice 2](#exercice-2)
   - [Les annotations de route](#les-annotations-de-route)
-- [Le moteur de templates Twig](#le-moteur-de-templates-twig)
-- 
+  - [Le moteur de templates Twig](#le-moteur-de-templates-twig)
+          - [Exercice 3](#exercice-3)
   
 
 ## Cours pour les webdev 2025
@@ -173,7 +173,16 @@ nous pouvons rajouter à notre `v1` les fonctionnalités webapp en utilisant la 
 composer require webapp
 ```
 
-Pour voir la structure de votre projet: [voir ici](https://symfony.com/doc/current/setup/flex.html#understanding-the-project-structure) ou [ici](https://github.com/mikhawa/Symfony-6.4-LTS?tab=readme-ov-file#structure-dun-projet-symfony)
+Pour la sécurité des bibliothèques tierces, nous pouvons vérifier les dépendances avec la commande suivante :
+
+```bash
+symfony security:check
+# ou
+composer audit
+```
+
+
+Pour voir la structure de votre projet : [voir ici](https://symfony.com/doc/current/setup/flex.html#understanding-the-project-structure) ou [ici](https://github.com/mikhawa/Symfony-6.4-LTS?tab=readme-ov-file#structure-dun-projet-symfony)
 
 [Retour au menu](#menu)
 
@@ -326,7 +335,7 @@ Son utilisation est très simple et permet de centraliser les routes de votre ap
 9. Testez votre application en accédant à l'URL `https://127.0.0.1:8000/about` dans votre navigateur, vous devriez voir le message "Bienvenue sur la page À propos !".
 10. Ajoutez un simple lien dans les réponses des deux méthodes pour naviguer entre les deux pages.
 
-Envoyez-moi le code à `gitweb@cf2m.be` de votre contrôleur `src\Controller\YamlController` et `config\routes.yaml` une fois que vous avez terminé l'exercice.
+Envoyez-moi le code à `gitweb@cf2m.be` de votre contrôleur `src\Controller\YamlController.php` et `config\routes.yaml` une fois que vous avez terminé l'exercice.
 
 [Retour au menu](#menu)
 
@@ -393,3 +402,35 @@ Voici un exemple simple de template Twig utilisant la variable `title` passée d
 </html>
 ```
 Dans ce template, nous utilisons la syntaxe Twig pour afficher la variable `title` dans la balise `<title>` et dans la balise `<h1>`. Twig offre de nombreuses fonctionnalités avancées, telles que les boucles, les conditions, les filtres, etc., qui permettent de créer des vues dynamiques et interactives.
+
+[Retour au menu](#menu)
+
+#### Exercice 3
+1. Créez un nouveau projet Symfony webapp nommé `SymfonyExercice3`.
+2. Créez un contrôleur nommé `TwigController` en utilisant la commande `make:controller`.
+3. Dans ce contrôleur, vous pouvez observer que `templates/twig/index.html.twig` est étendu par défaut de base.html.twig.
+```twig
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>
+```
+Importez `exercices/exercice3/template.html.twig` à la racine du dossier `templates` de votre projet.
+4. Modifiez le template `templates/twig/index.html.twig` pour qu'il étende `template.html.twig` au lieu de `base.html.twig`.
+5. Dans le template `templates/twig/index.html.twig`, remplacez le contenu des blocs `title` et `body` par les éléments suivants :
+   - Dans le bloc `title`, affichez "{{ controller_name }} | Accueil".
+   - Dans le bloc `main`, ajoutez une balise `<h1>` avec le texte "{{ controller_name }} | Bienvenue sur la page Twig Exercice 3 !" et un paragraphe `<p>` avec le texte "Ceci est un exercice pour pratiquer Twig dans Symfony.".
+6. Dans le contrôleur `TwigController`, modifiez la méthode `index` pour passer une variable `controller_name` avec la valeur "TwigController" à la vue et le path à `/`.
+7. Testez votre application en accédant à l'URL racine, vous devriez voir la page avec le titre et le contenu modifiés.
