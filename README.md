@@ -542,6 +542,78 @@ Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de votre contrôleur `src\C
 
 [Retour au menu](#menu)
 
+## Variables d'environnement et configuration de la base de données
+
+Créez un nouveau projet Symfony webapp nommé `SymfonyExercice5` :
+
+```bash
+symfony new SymfonyExercice5 --webapp
+cd SymfonyExercice5
+```
+
+Nous allons créer un fichier `.env.local` en copiant le fichier `.env` et en le renommant `.env.local` :
+
+```bash
+cp .env .env.local
+```
+
+Cette commande crée une copie du fichier `.env` existant et la nomme `.env.local`. Le fichier `.env.local` est utilisé pour stocker des variables d'environnement spécifiques à votre environnement de développement local.
+
+Il sera automatiquement chargé par Symfony lors de l'exécution de votre application, mais il ne sera pas inclus dans le contrôle de version (comme Git) si vous avez correctement configuré votre fichier `.gitignore` (par défaut). Cela permet de garder vos configurations locales privées et spécifiques à votre environnement.
+
+Dans le fichier `.env.local`, vous pouvez définir des variables d'environnement spécifiques à votre configuration locale, commençons par la clé de l'application :
+
+```dotenv
+APP_SECRET=votre_cle_secrete_ici
+```
+
+Pour obtenir une clé secrète de 64 caractères, vous pouvez utiliser la commande suivante dans votre terminal :
+
+```bash
+php -r 'echo bin2hex(random_bytes(32));'
+# ou 
+openssl rand -hex 32
+```
+
+Et remplacez `votre_cle_secrete_ici` par la clé générée **uniquement** dans votre fichier `.env.local`.
+
+C'est important pour la `sécurité` de votre application, notamment pour la `gestion des sessions` et des `tokens CSRF`.
+
+Nous utiliserons `MariaDB` pour la base de données. Assurez-vous que MariaDB ou MySQL est installé et en cours d'exécution sur votre machine locale.
+
+Changeons la ligne de connexion à la base de données dans le fichier `.env.local` :
+
+```dotenv
+# DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
+```
+
+Par :
+
+```dotenv
+DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/dbname?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+# DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
+```
+
+Il faut ensuite vérifier les paramètres de connexion à la base de données :
+- `app` : nom de l'utilisateur de la base de données (à créer dans MariaDB/MySQL)
+- `!ChangeMe!` : mot de passe de l'utilisateur (à définir dans MariaDB/MySQL)
+- `127.0.0.1` : adresse du serveur de base de données (localhost)
+- `3306` : port de connexion à MariaDB/MySQL (par défaut 3306 ou 3307)
+- `dbname` : nom de la base de données (à créer dans MariaDB/MySQL)
+- `serverVersion` : version du serveur de base de données (à adapter selon votre version de MariaDB/MySQL, cette information se trouve dans la commande `SELECT VERSION();` dans MariaDB/MySQL ou via `phpMyAdmin`)
+- `charset` : jeu de caractères utilisé (utf8mb4 recommandé pour MySQL/MariaDB)
+
+#### Choisissez sym_exe_05 comme nom de base de données
+
+Dès que vous avez configuré correctement votre connexion vers votre serveur de base de données, vous pouvez créer la base de données avec la commande suivante :
+
+```bash
+php bin/console doctrine:database:create
+```
+
+Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de fichier `.env.local` (celà reste un exercice) une fois que vous avez terminé cette étape.
+
 ## Création de la base de données avec Doctrine ORM
 
-
+Nous allons utili
