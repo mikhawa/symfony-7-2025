@@ -606,13 +606,21 @@ Il faut ensuite vérifier les paramètres de connexion à la base de données :
 
 #### Choisissez sym_exe_05 comme nom de base de données
 
+```bash
+sym_exe_05
+```
+
 Dès que vous avez configuré correctement votre connexion vers votre serveur de base de données, vous pouvez créer la base de données avec la commande suivante :
 
 ```bash
 php bin/console doctrine:database:create
 ```
 
+Vous devriez obtenir : `Created database sym_exe_05 for connection named default`
+
 Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de fichier `.env.local` (celà reste un exercice) une fois que vous avez terminé cette étape.
+
+[Retour au menu](#menu)
 
 ## Création de la base de données avec Doctrine ORM
 
