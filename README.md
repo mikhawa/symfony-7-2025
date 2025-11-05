@@ -20,6 +20,9 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
         - [Exercice 3](#exercice-3)
 - [Les routes avancées et les vues Twig](#les-routes-avancées-et-les-vues-twig)
         - [Exercice 4](#exercice-4)
+- [Variables d'environnement et configuration de la base de données](#variables-denvironnement-et-configuration-de-la-base-de-données)
+        - [Exercice 5](#exercice-5)
+- [Création d'une entité et manipulation des données avec Doctrine ORM](#création-dune-entité-et-manipulation-des-données-avec-doctrine-orm)
 
   
 
@@ -544,6 +547,20 @@ Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de votre contrôleur `src\C
 
 ## Variables d'environnement et configuration de la base de données
 
+Symfony utilise des fichiers de configuration basés sur des variables d'environnement pour gérer les paramètres de l'application, y compris la connexion à la base de données. La configuration par défaut se trouve dans le fichier `.env` à la racine de votre projet Symfony.
+
+L'installation sera faite avec `MariaDB` (ou `MySQL`), mais vous pouvez aussi utiliser `PostgreSQL` ou d'autres DB au besoin.
+
+L'installation de `MariaDB` ou `MySQL` doit être faite au préalable sur votre machine locale (via Wamp, Xampp, Mamp, LAMP, etc.).
+
+[Documentation officielle sur les variables d'environnement](https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-env-files)
+
+L'exercice 5 suivant vous guidera à travers la création d'un nouveau projet Symfony webapp, la configuration des variables d'environnement dans un fichier `.env.local`, et la connexion à une base de données MariaDB/MySQL.
+
+[Retour au menu](#menu)
+
+#### Exercice 5
+
 Créez un nouveau projet Symfony webapp nommé `SymfonyExercice5` :
 
 ```bash
@@ -614,6 +631,8 @@ Dès que vous avez configuré correctement votre connexion vers votre serveur de
 
 ##### Création de la base de données avec Doctrine ORM
 
+[Documentation officielle sur la configuration de la base de données](https://symfony.com/doc/current/doctrine.html#configuring-the-database)
+
 ```bash
 php bin/console doctrine:database:create
 ```
@@ -626,6 +645,35 @@ Vous devriez obtenir : `Created database sym_exe_05 for connection named default
 php bin/console make:controller HomeController
 ```
 
+Changez le code de `src/Controller/HomeController.php` :
+
+```php
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+# Ajout de l'use pour EntityManagerInterface
+use Doctrine\ORM\EntityManagerInterface;
+
+final class HomeController extends AbstractController
+{
+    #[Route('/', name: 'test_db')]
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        // Test de la connexion à la base de données
+        $connection = $entityManager->getConnection();
+        $databaseName = $connection->getDatabase(); 
+        return new Response("<body>Connexion réussie à la base de données : $databaseName </body>");
+    }
+}   
+```
+
+Accédez à l'URL racine `/` pour tester la connexion à la base de données.
+
+Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de votre contrôleur `src\Controller\HomeController.php` et votre fichier `.env.local` (ceci reste un exercice !) une fois que vous avez terminé.
 
 [Retour au menu](#menu)
 
@@ -635,4 +683,5 @@ Nous allons créer une entité `Article` pour représenter les articles de blog 
 ```bash
 php bin/console make:entity Article
 ```
+
 
