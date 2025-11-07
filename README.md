@@ -852,7 +852,7 @@ Et la magie opère (bien que le code généré puisse être amélioré) !
 #### Exercice 7
 1. Partez du projet `SymfonyExercice5` créé précédemment.
 2. Ajoutez une route sur le template `templates/home/index.html.twig` pour accéder à la liste des articles via le CRUD généré (utilisation de la fonction `path()` de Twig). Il nous affiche donc un lien vers la gestion des articles.
-3. Séparez le menu pour créer une navigation réutilisable dans `templates/inc/_nav.html.twig` et incluez-le dans `base.html.twig` :
+3. Séparez le menu pour créer une navigation réutilisable dans `templates/inc/_nav.html.twig` (par convention, l'underscore signifie que ce fichier sera importé) et incluez-le (`include`) dans `base.html.twig` :
 
 ```twig
 {# templates/inc/_nav.html.twig #}
