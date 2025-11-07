@@ -746,7 +746,8 @@ private ?string $slug = null;
 #[ORM\Column(type: Types::TEXT)]
 private ?string $content = null;
 
-#[ORM\Column]
+# champ nullable
+#[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
 private ?\DateTimeImmutable $publishedAt = null;
 
 # valeur par défaut à false
@@ -831,6 +832,8 @@ Cette commande génère automatiquement un contrôleur `ArticleController` dans 
 
 Le contrôleur `ArticleController` contient des méthodes pour chaque opération CRUD, telles que `index`, `new`, `show`, `edit`, et `delete`. Chaque méthode est associée à une route spécifique pour gérer les requêtes HTTP correspondantes.
 
+Regardez attentivement le code généré dans `src/Controller/ArticleController.php` et les vues Twig dans `templates/article/`. Vous remarquerez que Symfony utilise des formulaires pour gérer la création et la modification des articles, ainsi que des redirections appropriées après chaque opération.
+
 Voici un aperçu des routes générées pour le `CRUD` des articles :
 
 ```bash
@@ -846,7 +849,8 @@ $ php bin/console debug:router
  -------------------------- -------- -------- ------ ----------------
 ```
 
-Et la magie opère (bien que le code généré puisse être amélioré) !
+**Et la magie opère** (bien que le code généré puisse être amélioré) !
+
 [Retour au menu](#menu)
 
 #### Exercice 7
@@ -872,3 +876,6 @@ et dans `base.html.twig` :
 {#... #}
 ```
 4. Testez votre application en accédant à l'URL racine `/` pour voir le lien vers la gestion des articles.
+5. Cliquez sur le lien pour accéder à la liste des articles via le CRUD généré, ajoutez, modifiez et supprimez des articles pour tester les fonctionnalités CRUD.
+
+Vous remarquerez que le code généré peut être amélioré, notamment en ajoutant des validations, en n'ajoutant pas certains champs à l'insertion, en créant le `slug`, sans parler du graphisme !
