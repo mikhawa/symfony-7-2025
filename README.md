@@ -23,6 +23,7 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
 - [Les routes avancées et les vues Twig](#les-routes-avancées-et-les-vues-twig)
         - [Exercice 4](#exercice-4)
 - [Variables d'environnement et configuration de la base de données](#variables-denvironnement-et-configuration-de-la-base-de-données)
+    - [Utilisation de MariaDB](#utilisation-de-mariadb)
         - [Exercice 5](#exercice-5)
 - [Création d'une entité et manipulation des données avec Doctrine ORM](#création-dune-entité-et-manipulation-des-données-avec-doctrine-orm)
         - [Exercice 6](#exercice-6)
@@ -449,6 +450,7 @@ Importez `exercices/exercice3/template.html.twig` à la racine du dossier `templ
 Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` de votre contrôleur `src\Controller\TwigController.php` et `templates\twig\index.html.twig` une fois que vous avez terminé l'exercice.
 
 **Nous allons garder ce projet pour les exercices suivants.**
+
 [Retour au menu](#menu)
 
 ## Les routes avancées et les vues Twig
@@ -561,6 +563,24 @@ L'installation de `MariaDB` ou `MySQL` doit être faite au préalable sur votre 
 [Documentation officielle sur les variables d'environnement](https://symfony.com/doc/current/configuration.html#configuring-environment-variables-in-env-files)
 
 L'exercice 5 suivant vous guidera à travers la création d'un nouveau projet Symfony webapp, la configuration des variables d'environnement dans un fichier `.env.local`, et la connexion à une base de données MariaDB/MySQL.
+
+[Retour au menu](#menu)
+
+### Utilisation de MariaDB
+
+Pour que la configuration de la base de données fonctionne correctement avec MariaDB, modifiez `config/packages/doctrine.yaml` pour modifier `PostgreSQLPlatform` par défaut en `MariaDBPlatform` dans la section `orm` :
+
+```yaml
+doctrine:
+    # ...
+    orm:
+        # ...
+        identity_generation_preferences:
+        # Commentez cette ligne pour spécifier la version du serveur MariaDB
+        # Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+        # Ajoutez cette ligne pour spécifier la version du serveur MariaDB
+        Doctrine\DBAL\Platforms\MariaDBPlatform: identity
+```
 
 [Retour au menu](#menu)
 
@@ -708,6 +728,7 @@ Pour chaque champ, Symfony vous demandera de spécifier le type de données, la 
 Comme vous pouvez le voir, Symfony génère automatiquement les getters et setters pour chaque champ de l'entité dans le fichier `src/Entity/Article.php`. Un autre fichier `src/Repository/ArticleRepository.php` est aussi créé pour gérer les opérations de base de données liées à l'entité `Article`.
 
 Ces champs représentent les propriétés de l'entité `Article`, et les méthodes `get` et `set` permettent d'accéder et de modifier ces propriétés. Les annotations au-dessus des propriétés définissent la manière dont chaque champ est mappé à la base de données, et Doctrine est souple vis-à-vis de ces définitions.
+
 
 [Retour au menu](#menu)
 
@@ -892,3 +913,4 @@ Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` les fichiers suivants
 
 [Retour au menu](#menu)
 
+[La suite dans la partie 2](/partie2/README.md)
