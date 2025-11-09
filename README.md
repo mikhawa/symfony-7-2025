@@ -1,5 +1,7 @@
 # symfony-7-2025
 
+## Partie 1
+
 Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
 
 ## Menu
@@ -26,7 +28,7 @@ Cours de Symfony 7.3 (lors de l'installation) aux WebDev 2025.
         - [Exercice 6](#exercice-6)
 - [CRUD des articles](#crud-des-articles)
         - [Exercice 7](#exercice-7)
-
+- [Suite dans la partie 2](/partie2/README.md)
   
 
 ## Cours pour les webdev 2025
@@ -889,3 +891,4 @@ Envoyez-moi le code à `gitweb@cf2m.be` dans `Teams` les fichiers suivants
 - votre vue `templates/article/_form.html.twig` une fois que vous avez terminé.
 
 [Retour au menu](#menu)
+
