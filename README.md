@@ -540,7 +540,7 @@ Commencez ensuite l'exercice 4.
 #### Exercice 4
 1. Partez du projet `SymfonyExercice3` créé précédemment.
 2. Remplacez le contrôleur `TwigController` par se trouvant dans `exercices/exercice4/TwigController.php`.
-3. Mettez les 2 fichiers de vues Twig `templates/twig/article.html.twig` et `templates/twig/index.html.twig` dans le dossier `templates/twig/` de votre projet.
+3. Mettez les 2 fichiers de vues Twig `templates/twig/articles.html.twig` et `templates/twig/index.html.twig` dans le dossier `templates/twig/` de votre projet.
 4. Testez votre application en accédant à l'URL racine `/` pour voir la liste des articles.
 5. Cliquez sur un `articles` pour accéder à sa page détaillée via l'URL `/articles`.
 6. Créez une vue Twig `templates/twig/article.html.twig` qui affiche les détails de l'article en utilisant les variables passées depuis le contrôleur, dont l'id.
